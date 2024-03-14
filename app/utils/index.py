@@ -41,12 +41,31 @@ client = QdrantClient("http://localhost:6333")
 # client = QdrantClient(path="./qdrant_data_new2")
 
 # client = QdrantClient(path="./qdrant_data")
+# vector_store = QdrantVectorStore(
+#     collection_name="my_collection",
+#     client=client,
+#     enable_hybrid=True,
+#     batch_size=20,
+# )
+# print(client.get_collections())
+collections = client.get_collections()
+
+print(type(collections))
+collection_list = collections.collections
+for collection in collection_list:
+    collection_name = collection.name
+
+if "my_collection" in collection_name:
+    collection_exists = True
+else:
+    collection_exists = False
+# print(collection_exists)
 
 
 def get_index():
     logger = logging.getLogger("uvicorn")
     # check if storage already exists
-    if not os.path.exists(STORAGE_DIR):
+    if not collection_exists:
 
         logger.info("Creating new index")
         embed_model = HuggingFaceEmbedding(
