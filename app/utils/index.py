@@ -24,8 +24,7 @@ from llama_index.vector_stores.qdrant import QdrantVectorStore
 from qdrant_client import QdrantClient
 import qdrant_client
 
-
-os.environ["OPENAI_API_KEY"] = "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"
+"
 
 STORAGE_DIR = "./qdrant_storage"  # directory to cache the generated index
 DATA_DIR = "./data"  # directory containing the documents to index
